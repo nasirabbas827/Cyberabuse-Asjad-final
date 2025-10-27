@@ -21,6 +21,8 @@
       background-color: var(--navy);
       color: var(--light-gray);
       line-height: 1.6;
+      margin: 0;
+      padding: 0;
     }
 
     .navbar {
@@ -36,7 +38,7 @@
     .nav-link:hover {
       color: var(--light-cyan) !important;
     }
-    
+
     .hero-banner {
       background: linear-gradient(135deg, var(--dark-blue) 0%, var(--navy) 100%);
       padding: 80px 20px;
@@ -45,16 +47,16 @@
     }
 
     .hero-banner h1 {
-      font-size: 3rem;
+      font-size: 2.8rem;
       font-weight: 700;
       color: var(--light-cyan);
       margin-bottom: 10px;
     }
-    
+
     .hero-banner p {
-        font-size: 1.25rem;
-        max-width: 700px;
-        margin: 0 auto;
+      font-size: 1.25rem;
+      max-width: 700px;
+      margin: 0 auto;
     }
 
     .card-form {
@@ -64,7 +66,7 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
       border: 1px solid rgba(0, 230, 230, 0.2);
     }
-    
+
     .card-form h2 {
       color: var(--light-cyan);
       margin-bottom: 30px;
@@ -80,10 +82,10 @@
       padding: 12px;
       transition: border-color 0.3s;
     }
-    
+
     textarea:focus, select:focus {
-        border-color: var(--light-cyan);
-        box-shadow: 0 0 8px rgba(0, 230, 230, 0.6);
+      border-color: var(--light-cyan);
+      box-shadow: 0 0 8px rgba(0, 230, 230, 0.6);
     }
 
     .btn-custom {
@@ -102,64 +104,66 @@
       transform: translateY(-2px);
       box-shadow: 0 4px 15px rgba(0, 230, 230, 0.4);
     }
-    
+
     .result {
-        margin-top: 25px;
-        font-size: 1.5rem;
-        font-weight: 700;
-        text-align: center;
+      margin-top: 25px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-align: center;
     }
-    
+
     .result.success {
-        color: var(--green-success);
+      color: var(--green-success);
     }
-    
+
     .result.error {
-        color: var(--red-error);
+      color: var(--red-error);
     }
-    
+
     .section-container {
-        background-color: var(--dark-blue);
-        padding: 60px 20px;
-        margin-top: 50px;
+      background-color: var(--dark-blue);
+      padding: 60px 20px;
+      margin-top: 50px;
     }
-    
+
     .section-container h2 {
-        color: var(--light-cyan);
-        font-weight: 600;
-        text-align: center;
-        margin-bottom: 30px;
+      color: var(--light-cyan);
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 30px;
     }
 
     footer {
-        background-color: var(--navy);
-        padding: 20px;
-        text-align: center;
-        color: rgba(255, 255, 255, 0.6);
-        border-top: 1px solid rgba(0, 230, 230, 0.1);
+      background-color: var(--navy);
+      padding: 20px;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.6);
+      border-top: 1px solid rgba(0, 230, 230, 0.1);
     }
-    
+
     footer p {
-        margin: 0;
+      margin: 0;
     }
-    
+
     a {
-        color: var(--light-cyan);
-        text-decoration: none;
-        transition: color 0.3s;
+      color: var(--light-cyan);
+      text-decoration: none;
+      transition: color 0.3s;
     }
-    
+
     a:hover {
-        color: #00cccc;
+      color: #00cccc;
     }
   </style>
 </head>
 <body>
+  <!-- ==================== Navbar ==================== -->
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/">CyberGuard</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+      <a class="navbar-brand fw-bold" href="/">CyberGuard</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon text-light"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
@@ -171,11 +175,13 @@
     </div>
   </nav>
 
+  <!-- ==================== Hero Banner ==================== -->
   <header class="hero-banner">
     <h1>CyberGuard: Roman Urdu Abuse Detection</h1>
     <p class="lead">Harnessing the power of AI to create safer online spaces. Instantly test comments for abusive content.</p>
   </header>
 
+  <!-- ==================== Main Section ==================== -->
   <main class="container">
     <div class="row justify-content-center">
       <div class="col-md-8 col-lg-7">
@@ -184,40 +190,54 @@
           <form method="POST">
             <div class="mb-3">
               <label for="model" class="form-label">Select Prediction Model:</label>
-              <select class="form-select" name="model" id="model">
+              <select class="form-select" name="model" id="model" required>
                 {% for model in models %}
-                <option value="{{ model }}" {% if model == selected_model %}selected{% endif %}>{{ model }}</option>
+                  <option value="{{ model }}" {% if model == selected_model %}selected{% endif %}>{{ model }}</option>
                 {% endfor %}
               </select>
             </div>
             <div class="mb-4">
               <label for="comment" class="form-label">Enter Comment (Roman Urdu):</label>
-              <textarea class="form-control" name="comment" id="comment" required placeholder="Type your comment here...">{{ comment }}</textarea>
+              <textarea class="form-control" name="comment" id="comment" rows="4"
+                        placeholder="Type your Roman Urdu comment here..." required>{{ comment }}</textarea>
             </div>
             <button type="submit" class="btn-custom">Predict</button>
           </form>
           {% if prediction %}
-            <div class="result {{ 'error' if prediction == 'Abusive' else 'success' }}">{{ prediction }}</div>
+            <div class="result {{ 'error' if prediction == 'Abusive' else 'success' }}">
+              {{ prediction }}
+            </div>
           {% endif %}
         </div>
       </div>
     </div>
   </main>
-  
+
+  <!-- ==================== About Section ==================== -->
   <div class="section-container" id="about">
-      <div class="container">
-        <h2>About CyberGuard</h2>
-        <p class="text-center mx-auto" style="max-width: 800px;">This project leverages advanced machine learning models, including Logistic Regression, Decision Tree, and Random Forest, to analyze and classify Roman Urdu text. Our goal is to empower online platforms to automatically detect and flag harmful content, creating a more positive and respectful environment for all users.</p>
-      </div>
+    <div class="container">
+      <h2>About CyberGuard</h2>
+      <p class="text-center mx-auto" style="max-width: 800px;">
+        This project leverages machine learning models — Logistic Regression, Decision Tree, Random Forest, and SVM — 
+        to analyze and classify Roman Urdu text. Our goal is to empower online platforms to automatically detect and 
+        flag harmful content, helping to create a more positive and respectful digital environment.
+      </p>
+    </div>
   </div>
 
+  <!-- ==================== Contact Section ==================== -->
   <div class="section-container" id="contact">
-      <div class="container">
-        <h2>Get in Touch</h2>
-        <p class="text-center">For any feedback, questions, or collaboration opportunities, please don't hesitate to reach out to us at <a href="mailto:contact@cyberguard.com">contact@cyberguard.com</a>. We value your input and are always looking to improve our system.</p>
-      </div>
+    <div class="container">
+      <h2>Get in Touch</h2>
+      <p class="text-center mx-auto" style="max-width: 700px;">
+        For any feedback, questions, or collaboration opportunities, please reach out to us at 
+        <a href="mailto:contact@cyberguard.com">contact@cyberguard.com</a>.
+        We value your input and are always looking to improve our system.
+      </p>
+    </div>
   </div>
 
+  <!-- ==================== Footer ==================== -->
   <footer>
     <p>&copy; 2025 CyberGuard Project. All rights reserved.</p>
   </footer>
